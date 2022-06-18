@@ -37,6 +37,7 @@ public class Repository {
         } catch (Exception e) {
             System.out.println("Не удалось подключиться к БД");
             System.out.println(e.getMessage());
+            System.exit(0);
         }
     }
 
@@ -46,13 +47,13 @@ public class Repository {
         ResultSet results = statement.executeQuery("select * from " + tableName + " order by id");
 
         while (results.next()) {
-            int id = Integer.parseInt(results.getString(1));
+            String col1 = results.getString(1);
             String col2 = results.getString(2);
             String col3 = results.getString(3);
             switch (tableName) {
-                case "enrollment" -> new Enrollment(id, Integer.parseInt(col2), Integer.parseInt(col3));
-                case "course" -> new Course(id, col2, col3);
-                case "student" -> new Student(id, col2, col3);
+                case "enrollment" -> new Enrollment(Integer.parseInt(col1), Integer.parseInt(col2), Integer.parseInt(col3));
+                case "course" -> new Course(Integer.parseInt(col1), col2, col3);
+                case "student" -> new Student(Integer.parseInt(col1), col2, col3);
             }
         }
     }
@@ -115,13 +116,12 @@ public class Repository {
 
     public static void updateCourse(int id, String title, String description) {
         update("course", id, title, description);
-
     }
 
     public static void updateStudent(int id, String name, String surname) {
-        update("course", id, name, surname);
-
+        update("student", id, name, surname);
     }
+
 
 
     public static void update(String tableName, int id, String col2, String col3) {
