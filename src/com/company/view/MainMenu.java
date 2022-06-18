@@ -5,6 +5,7 @@ import com.company.view.course.AddCourseFrame;
 import com.company.view.student.AddStudentFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,8 +20,14 @@ public class MainMenu extends JMenuBar {
     private JMenu fileMenu() {
         JMenu file = new JMenu("Файл");
         JMenuItem settings = new JMenu("Настройки");
+        JMenuItem colors = new JMenuItem("Сменить цвет");
 
+        colors.addActionListener(e -> Main.mainFrame.changeColor());
+
+        settings.add(colors);
         file.add(settings);
+
+
 
         JMenuItem exit = new JMenuItem("Выход");
         exit.addActionListener(e -> System.exit(0));

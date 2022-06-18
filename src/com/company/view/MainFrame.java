@@ -1,13 +1,16 @@
 package com.company.view;
 
-import com.company.Main;
 import com.company.view.course.CourseListPanel;
 import com.company.view.student.StudentListPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
+    Color[] colors = new Color[]{Color.DARK_GRAY, Color.WHITE};
+    private int colorIndex = 0;
+
     public static StudentListPanel studentsPanel = new StudentListPanel();
     public static CourseListPanel coursePanel = new CourseListPanel();
 
@@ -35,5 +38,8 @@ public class MainFrame extends JFrame {
         add(studentsPanel);
     }
 
-
+    public void changeColor() {
+        colorIndex = (colorIndex + 1) % colors.length;
+        getContentPane().setBackground(colors[colorIndex]);
+    }
 }
