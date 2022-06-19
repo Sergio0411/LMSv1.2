@@ -1,7 +1,6 @@
 package com.company.view.student;
 
 import com.company.model.Student;
-
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

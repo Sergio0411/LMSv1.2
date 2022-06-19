@@ -3,7 +3,6 @@ package com.company.view.student;
 import com.company.model.Enrollment;
 import com.company.model.Student;
 import com.company.view.course.GetCoursesFrame;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

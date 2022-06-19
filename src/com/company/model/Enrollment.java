@@ -1,7 +1,6 @@
 package com.company.model;
 
 import com.company.repository.Repository;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 

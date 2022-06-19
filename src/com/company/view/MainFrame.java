@@ -5,7 +5,6 @@ import com.company.view.student.StudentListPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     Color[] colors = new Color[]{Color.DARK_GRAY, Color.WHITE};

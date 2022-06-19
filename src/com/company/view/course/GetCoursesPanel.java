@@ -2,10 +2,8 @@ package com.company.view.course;
 
 import com.company.model.Course;
 import com.company.model.Student;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
 
 public class GetCoursesPanel extends JPanel {
     public JTable table = new JTable();

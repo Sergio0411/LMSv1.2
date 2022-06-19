@@ -1,13 +1,7 @@
 package com.company.view;
 
 import com.company.Main;
-import com.company.view.course.AddCourseFrame;
-import com.company.view.student.AddStudentFrame;
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainMenu extends JMenuBar {
 
@@ -26,8 +20,6 @@ public class MainMenu extends JMenuBar {
 
         settings.add(colors);
         file.add(settings);
-
-
 
         JMenuItem exit = new JMenuItem("Выход");
         exit.addActionListener(e -> System.exit(0));

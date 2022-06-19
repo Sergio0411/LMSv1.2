@@ -2,11 +2,8 @@ package com.company.view.student;
 
 import com.company.Main;
 import com.company.model.Student;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddStudentPanel extends JPanel {
     public AddStudentPanel() {

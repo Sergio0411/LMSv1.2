@@ -2,9 +2,7 @@ package com.company.view.course;
 
 import com.company.model.Course;
 import com.company.model.Enrollment;
-import com.company.model.Student;
 import com.company.view.student.GetStudentsFrame;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,6 +46,4 @@ public class CoursePopupMenu extends JPopupMenu {
             }
         }
     }
-
-
 }

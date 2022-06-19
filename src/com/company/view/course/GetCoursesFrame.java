@@ -3,7 +3,6 @@ package com.company.view.course;
 import com.company.model.Course;
 import com.company.model.Enrollment;
 import com.company.model.Student;
-
 import javax.swing.*;
 import java.awt.*;
 

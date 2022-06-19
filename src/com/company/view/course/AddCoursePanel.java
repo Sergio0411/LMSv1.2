@@ -2,12 +2,8 @@ package com.company.view.course;
 
 import com.company.Main;
 import com.company.model.Course;
-import com.company.view.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddCoursePanel extends JPanel {
     public AddCoursePanel(){

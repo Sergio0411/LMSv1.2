@@ -3,7 +3,6 @@ package com.company.view.student;
 import com.company.model.Course;
 import com.company.model.Enrollment;
 import com.company.model.Student;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -45,7 +44,5 @@ public class GetStudentsFrame extends JFrame {
         panel.add(button);
         pack();
         setVisible(true);
-
-
     }
 }

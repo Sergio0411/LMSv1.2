@@ -1,7 +1,6 @@
 package com.company.view;
 
 import com.company.model.Login;
-
 import javax.swing.*;
 import java.awt.*;
 
