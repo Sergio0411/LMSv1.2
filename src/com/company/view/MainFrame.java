@@ -29,7 +29,7 @@ public class MainFrame extends JFrame {
         setTitle("LMS");
         setJMenuBar(new MainMenu());
         getContentPane().setBackground(Color.DARK_GRAY);
-        setSize(500, 500);
+        setSize(500, 510);
         setLocation(710, 290);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

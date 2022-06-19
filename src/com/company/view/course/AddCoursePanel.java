@@ -20,7 +20,7 @@ public class AddCoursePanel extends JPanel {
                 new Course(title.getText(), description.getText());
                 title.setText("");
                 description.setText("");
-                Main.addStudentFrame.setVisible(false);
+                Main.addCourseFrame.setVisible(false);
             }
         });
 

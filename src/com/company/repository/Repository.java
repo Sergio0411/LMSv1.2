@@ -121,8 +121,6 @@ public class Repository {
         update("student", id, name, surname);
     }
 
-
-
     public static void update(String tableName, int id, String col2, String col3) {
         try {
             // создаём соединение
