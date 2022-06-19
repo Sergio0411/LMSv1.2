@@ -8,8 +8,8 @@ public class LoginFrame extends JFrame {
     public LoginFrame() {
         setTitle("Login to LMS");
         getContentPane().setBackground(Color.DARK_GRAY);
-        setSize(400, 200);
-        setLocation(760, 440);
+        setSize(330, 136);
+        setLocation(795, 472);
         setLayout(new FlowLayout());
         BoxLayout layout = new BoxLayout(loginPanel, BoxLayout.Y_AXIS);
         loginPanel.setLayout(layout);
