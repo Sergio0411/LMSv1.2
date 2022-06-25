@@ -1,6 +1,7 @@
 package com.company.model;
 
 import com.company.repository.Repository;
+
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,21 +11,22 @@ public class Course {
     private int id;
     String title;
     String description;
+    String teacher;
 
     private static int lastId;
     public static DefaultTableModel model = new DefaultTableModel();
     public static ArrayList<Course> allCourses = new ArrayList<>();
 
 
-    public Course(String title, String description) {
-        setProperties(++lastId, title, description);
-        Repository.addCourse(id, title, description);
+    public Course(String title, String description, String teacher) {
+        setProperties(++lastId, title, description, teacher);
+        Repository.addCourse(id + "", title, description, teacher);
 
     }
 
-    public Course(int id, String title, String description) {
+    public Course(int id, String title, String description, String teacher) {
         lastId = id;
-        setProperties(id, title, description);
+        setProperties(id, title, description, teacher);
     }
 
     public static ArrayList<Course> getCoursesToEnrollByStudent(Student student) {
@@ -34,13 +36,14 @@ public class Course {
         return new ArrayList<>(set);
     }
 
-    public void setProperties(int id, String title, String description) {
+    public void setProperties(int id, String title, String description, String teacher) {
 
         this.id = id;
         this.title = title;
         this.description = description;
+        this.teacher = teacher;
         allCourses.add(this);
-        model.addRow(new Object[]{this.id, title, description});
+        model.addRow(new Object[]{this.id, title, description, teacher});
     }
 
     public static void update(int id, String title, String description) {

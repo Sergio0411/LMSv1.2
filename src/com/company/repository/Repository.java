@@ -3,6 +3,7 @@ package com.company.repository;
 import com.company.model.Course;
 import com.company.model.Enrollment;
 import com.company.model.Student;
+
 import java.sql.*;
 import java.util.HashMap;
 
@@ -13,8 +14,8 @@ public class Repository {
     private static final HashMap<String, String[]> tables = new HashMap<>() {
         {
             put("enrollment", new String[]{"id", "student_id", "course_id"});
-            put("student", new String[]{"id", "name", "surname"});
-            put("course", new String[]{"id", "title", "description"});
+            put("student", new String[]{"id", "name", "surname", "email", "phone"});
+            put("course", new String[]{"id", "title", "description", "teacher"});
         }
     };
 
@@ -36,7 +37,6 @@ public class Repository {
         } catch (Exception e) {
             System.out.println("Не удалось подключиться к БД");
             System.out.println(e.getMessage());
-            System.exit(0);
         }
     }
 
@@ -44,15 +44,19 @@ public class Repository {
         // запустим соединение
         Statement statement = conn.createStatement();
         ResultSet results = statement.executeQuery("select * from " + tableName + " order by id");
-
+        String[] fields = tables.get(tableName);
         while (results.next()) {
-            String col1 = results.getString(1);
-            String col2 = results.getString(2);
-            String col3 = results.getString(3);
+            String[] values = new String[fields.length];
+            for (int i = 0; i < fields.length; i++) {
+                values[i] = results.getString(i + 1);
+            }
+
             switch (tableName) {
-                case "enrollment" -> new Enrollment(Integer.parseInt(col1), Integer.parseInt(col2), Integer.parseInt(col3));
-                case "course" -> new Course(Integer.parseInt(col1), col2, col3);
-                case "student" -> new Student(Integer.parseInt(col1), col2, col3);
+                case "enrollment" -> new Enrollment(Integer.parseInt(values[0]),
+                        Integer.parseInt(values[1]),
+                        Integer.parseInt(values[2]));
+                case "course" -> new Course(Integer.parseInt(values[0]), values[1], values[2], values[3]);
+                case "student" -> new Student(Integer.parseInt(values[0]), values[1], values[2], values[3], values[4]);
             }
         }
     }
@@ -83,19 +87,19 @@ public class Repository {
     }
 
 
-    public static void addCourse(int id, String title, String description) {
-        add("course", id, title, description);
+    public static void addCourse(String id, String title, String description, String teacher) {
+        add("course", new String[]{id, title, description, teacher});
     }
 
-    public static void addStudent(int id, String name, String surname) {
-        add("student", id, name, surname);
+    public static void addStudent(String id, String name, String surname, String email, String phone) {
+        add("student",  new String[]{id, name, surname, email, phone});
     }
 
-    public static void addEnrollment(int id, String student_id, String course_id) {
-        add("enrollment", id, student_id, course_id);
+    public static void addEnrollment(String id, String student_id, String course_id) {
+        add("enrollment",  new String[]{id, student_id, course_id});
     }
 
-    public static void add(String tableName, int id, String col2, String col3) {
+    public static void add(String tableName, String[] values) {
         try {
             // создаём соединение
             Connection conn = DriverManager.getConnection(Repository.url, Repository.user, Repository.password);
@@ -104,7 +108,7 @@ public class Repository {
             PreparedStatement statement =
                     conn.prepareStatement(
                             "insert into " + tableName + " values " +
-                                    "(" + id + ", " + col2 + ", " + col3 + ")");
+                                    "(" + String.join(", ", values) + ")");
             statement.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -115,11 +119,14 @@ public class Repository {
 
     public static void updateCourse(int id, String title, String description) {
         update("course", id, title, description);
+
     }
 
     public static void updateStudent(int id, String name, String surname) {
-        update("student", id, name, surname);
+        update("course", id, name, surname);
+
     }
+
 
     public static void update(String tableName, int id, String col2, String col3) {
         try {
@@ -142,4 +149,6 @@ public class Repository {
             System.out.println(e.getMessage());
         }
     }
+
+
 }

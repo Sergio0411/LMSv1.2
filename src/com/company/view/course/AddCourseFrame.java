@@ -1,13 +1,19 @@
 package com.company.view.course;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AddCourseFrame extends JFrame {
+    public JPanel panel = new AddCoursePanel();
     public AddCourseFrame(){
         setTitle("Добавление курса");
-        setSize(300, 200);
+        getContentPane().setBackground(Color.DARK_GRAY);
         setLocation(810, 440);
-        add(new AddCoursePanel());
+        setLayout(new FlowLayout());
+        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+        panel.setLayout(layout);
+        add(panel);
         setVisible(false);
+        pack();
     }
 }
