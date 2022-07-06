@@ -2,6 +2,8 @@ package com.company.view.course;
 
 import com.company.model.Course;
 import com.company.model.Student;
+import com.company.model.Teacher;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +14,15 @@ public class GetCoursesPanel extends JPanel {
         model.setColumnIdentifiers(new String[]{"ID", "Title", "Description"});
 
         for (Course course : student.getCourses(toEnroll)){
+            model.addRow(new Object[] {course.getId(), course.getTitle(), course.getDescription()});
+        }
+        table.setModel(model);
+        add(new JScrollPane(table));
+    }
+    public GetCoursesPanel(Teacher teacher, boolean toEnroll) {
+        model.setColumnIdentifiers(new String[]{"ID", "Title", "Description"});
+
+        for (Course course : teacher.getCourses(toEnroll)){
             model.addRow(new Object[] {course.getId(), course.getTitle(), course.getDescription()});
         }
         table.setModel(model);

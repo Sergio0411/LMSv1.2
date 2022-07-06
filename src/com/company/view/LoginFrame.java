@@ -8,7 +8,7 @@ public class LoginFrame extends JFrame {
     public LoginFrame() {
         setTitle("Login to LMS");
         getContentPane().setBackground(Color.DARK_GRAY);
-        setSize(330, 136);
+        setSize(380, 140);
         setLocation(795, 472);
         setLayout(new FlowLayout());
         BoxLayout layout = new BoxLayout(loginPanel, BoxLayout.Y_AXIS);
@@ -17,5 +17,6 @@ public class LoginFrame extends JFrame {
 
         add(loginPanel);
         setVisible(true);
+        pack();
     }
 }

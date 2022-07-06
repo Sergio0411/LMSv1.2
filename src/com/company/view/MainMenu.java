@@ -1,6 +1,8 @@
 package com.company.view;
 
 import com.company.Main;
+import com.company.model.Account;
+
 import javax.swing.*;
 
 public class MainMenu extends JMenuBar {
@@ -21,19 +23,30 @@ public class MainMenu extends JMenuBar {
         settings.add(colors);
         file.add(settings);
 
+        JMenuItem deleteAcc = new JMenuItem("Удалить текущего пользователя");
+
+        file.add(deleteAcc);
+        deleteAcc.addActionListener(e -> {
+            int id = Account.getIdByUser();
+            Main.id = id;
+            Main.deleteAccountFrame = new DeleteAccountFrame(id);
+            Main.deleteAccountFrame.setVisible(true);
+        });
+        file.addSeparator();
         JMenuItem exit = new JMenuItem("Выход");
-        exit.addActionListener(e -> System.exit(0));
+        exit.addActionListener(e -> {
+            Main.addCourseFrame.setVisible(false);
+            Main.mainFrame.setVisible(false);
+            Main.loginFrame.setVisible(true);
+        });
         file.add(exit);
         return file;
     }
 
     private JMenu addMenu() {
         JMenu addMenu = new JMenu("Добавить");
-        JMenuItem addStudent = new JMenuItem("Студент");
-        addStudent.addActionListener(e -> Main.addStudentFrame.setVisible(true));
         JMenuItem addCourse = new JMenuItem("Курс");
         addCourse.addActionListener(e -> Main.addCourseFrame.setVisible(true));
-        addMenu.add(addStudent);
         addMenu.add(addCourse);
         return addMenu;
     }
@@ -44,6 +57,9 @@ public class MainMenu extends JMenuBar {
         students.addActionListener(e -> Main.mainFrame.showStudents());
         JMenuItem courses = new JMenuItem("Курсы");
         courses.addActionListener(e -> Main.mainFrame.showCourses());
+        JMenuItem teachers = new JMenuItem("Учителя");
+        teachers.addActionListener(e -> Main.mainFrame.showTeachers());
+        lists.add(teachers);
         lists.add(students);
         lists.add(courses);
         return lists;

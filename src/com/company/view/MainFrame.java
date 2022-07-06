@@ -1,7 +1,8 @@
 package com.company.view;
 
-import com.company.view.course.CourseListPanel;
 import com.company.view.student.StudentListPanel;
+import com.company.view.course.CourseListPanel;
+import com.company.view.teacher.TeacherListPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,16 +13,26 @@ public class MainFrame extends JFrame {
 
     public static StudentListPanel studentsPanel = new StudentListPanel();
     public static CourseListPanel coursePanel = new CourseListPanel();
+    public static TeacherListPanel teacherPanel = new TeacherListPanel();
 
     public void showCourses() {
         remove(studentsPanel);
+        remove(teacherPanel);
         add(coursePanel);
         pack();
     }
 
     public void showStudents() {
         remove(coursePanel);
+        remove(teacherPanel);
         add(studentsPanel);
+        pack();
+    }
+
+    public void showTeachers() {
+        remove(coursePanel);
+        remove(studentsPanel);
+        add(teacherPanel);
         pack();
     }
 

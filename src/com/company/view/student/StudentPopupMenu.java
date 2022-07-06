@@ -35,9 +35,11 @@ public class StudentPopupMenu extends JPopupMenu {
             int id = Integer.parseInt(StudentListPanel.table.getValueAt(rowIndex, 0).toString());
             String name = StudentListPanel.table.getValueAt(rowIndex, 1).toString();
             String surname = StudentListPanel.table.getValueAt(rowIndex, 2).toString();
+            String email = StudentListPanel.table.getValueAt(rowIndex, 3).toString();
+            String phone = StudentListPanel.table.getValueAt(rowIndex, 4).toString();
 
             switch (e.getActionCommand()) {
-                case "save" -> Student.update(id, name, surname);
+                case "save" -> Student.update(id, name, surname, email, phone);
                 case "delete" -> {
                     Student.delete(id, rowIndex);
                     Enrollment.removeByStudentId(id);

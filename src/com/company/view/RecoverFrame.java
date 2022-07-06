@@ -1,17 +1,19 @@
-package com.company.view.student;
+package com.company.view;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class AddStudentFrame extends JFrame {
-    public JPanel panel = new AddStudentPanel();
-    public AddStudentFrame(){
-        setTitle("Добавление студента");
+public class RecoverFrame extends JFrame {
+    public static RecoverPanel panel = new RecoverPanel();
+    public RecoverFrame(){
+        setTitle("Восстановление пароля");
         getContentPane().setBackground(Color.DARK_GRAY);
-        setLocation(810, 440);
+        setSize(330, 136);
+        setLocation(795, 472);
         setLayout(new FlowLayout());
         BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(layout);
+
         add(panel);
         setVisible(false);
         pack();

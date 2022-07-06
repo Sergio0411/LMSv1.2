@@ -6,8 +6,9 @@ import com.company.model.Account;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginPanel extends JPanel {
-    public LoginPanel(){
+public class DeleteAccountPanel extends JPanel {
+    public DeleteAccountPanel(){
+        int id = Account.toDelete();
         JPanel login = new JPanel();
         JPanel password = new JPanel();
         JTextField logText = new JTextField(20);
@@ -15,19 +16,16 @@ public class LoginPanel extends JPanel {
         JLabel log = new JLabel("         Login: ");
         JLabel pass = new JLabel("Password: ");
         setBackground(Color.GRAY);
-        JButton entrance = new JButton("Войти");
-        JButton register = new JButton("Регистрация");
-        JButton recover = new JButton("Восстановить");
+        JButton entrance = new JButton("Удалить");
         JPanel buttons = new JPanel();
         entrance.addActionListener(e -> {
-            Account.saveLog(logText.getText(), passText.getText());
+            Account.delete(id);
             logText.setText("");
             passText.setText("");
-            Main.recoverFrame.setVisible(false);
-            Main.registerFrame.setVisible(false);
+            Main.mainFrame.setVisible(false);
+            Main.loginFrame.setVisible(true);
+            Main.deleteAccountFrame.setVisible(false);
         });
-        register.addActionListener(e -> Main.registerFrame.setVisible(true));
-        recover.addActionListener(e -> Main.recoverFrame.setVisible(true));
 
         add(login);
         add(password);
@@ -37,7 +35,5 @@ public class LoginPanel extends JPanel {
         password.add(passText);
         add(buttons);
         buttons.add(entrance);
-        buttons.add(register);
-        buttons.add(recover);
     }
 }

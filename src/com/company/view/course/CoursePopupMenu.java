@@ -3,6 +3,8 @@ package com.company.view.course;
 import com.company.model.Course;
 import com.company.model.Enrollment;
 import com.company.view.student.GetStudentsFrame;
+import com.company.view.teacher.GetTeacherFrame;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,9 +14,10 @@ public class CoursePopupMenu extends JPopupMenu {
 
     public CoursePopupMenu() {
         add(item("Сохранить", "save"));
-        add(item("Удалить", "delete"));
         add(item("Студенты", "students"));
         add(item("Зачислить", "enroll"));
+        addSeparator();
+        add(item("Удалить", "delete"));
 
     }
 
@@ -33,9 +36,10 @@ public class CoursePopupMenu extends JPopupMenu {
             int id = Integer.parseInt(CourseListPanel.table.getValueAt(rowIndex, 0).toString());
             String title = CourseListPanel.table.getValueAt(rowIndex, 1).toString();
             String description = CourseListPanel.table.getValueAt(rowIndex, 2).toString();
+            String teacher = CourseListPanel.table.getValueAt(rowIndex, 3).toString();
 
             switch (e.getActionCommand()) {
-                case "save" -> Course.update(id, title, description);
+                case "save" -> Course.update(id, title, description, teacher);
                 case "delete" -> {
                     Course.delete(id, rowIndex);
                     Enrollment.removeByCourseId(id);

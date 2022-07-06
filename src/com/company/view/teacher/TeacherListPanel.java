@@ -1,21 +1,20 @@
-package com.company.view.course;
+package com.company.view.teacher;
 
-import com.company.model.Course;
+import com.company.model.Student;
+import com.company.model.Teacher;
 import com.company.view.student.StudentPopupMenu;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class CourseListPanel extends JPanel {
+public class TeacherListPanel extends JPanel{
     public static JTable table = new JTable();
-    public static String[] columnsName = new String[]{"ID", "Название", "Описание", "Преподаватель"};
-
-    public CourseListPanel(){
-        Course.model.setColumnIdentifiers(columnsName);
-        table.setModel(Course.model);
+    public TeacherListPanel(){
+        Teacher.model.setColumnIdentifiers(new String[]{"ID", "Имя", "Фамилия", "Почта", "Телефон"});
+        table.setModel(Teacher.model);
         add(new JScrollPane(table));
-        CoursePopupMenu popupMenu = new CoursePopupMenu();
+        TeacherPopupMenu popupMenu = new TeacherPopupMenu();
         setComponentPopupMenu(popupMenu);
         table.addMouseListener(
                 new MouseAdapter() {

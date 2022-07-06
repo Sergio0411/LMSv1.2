@@ -19,8 +19,7 @@ public class Student {
 
     public Student(String name, String surname, String email, String phone) {
         setProperties(++lastId, name, surname, email, phone);
-        Repository.addStudent(id + "", name, surname, email, phone);
-
+        Repository.addStudent(String.valueOf(lastId), forRepository(name, surname, email, phone));
     }
 
     public Student(int id, String name, String surname, String email, String phone) {
@@ -28,8 +27,20 @@ public class Student {
         setProperties(id, name, surname,  email, phone);
     }
 
-    public static void update(int id, String name, String surname) {
-        Repository.updateStudent(id, name, surname);
+    private static String[] forRepository(String name, String surname, String email, String phone) {
+        name = "'" + name + "'";
+        surname = "'" + surname + "'";
+        email = "'" + email + "'";
+        phone = "'" + phone + "'";
+        return new String[]{name, surname, email, phone};
+    }
+
+    public void add(int id, String name, String surname, String email, String phone){
+        Repository.addStudent(id + "", forRepository(name, surname, email, phone));
+    }
+
+    public static void update(int id, String name, String surname, String email, String phone) {
+        Repository.updateStudent(id, forRepository(name, surname, email, phone));
     }
 
     public static void delete(int id, int rowIndex) {
@@ -95,7 +106,6 @@ public class Student {
     }
 
     public String getName() {
-
         return name;
     }
 
