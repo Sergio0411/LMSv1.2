@@ -16,7 +16,7 @@ public class Repository {
             put("student", new String[]{"id", "name", "surname", "email", "phone"});
             put("teacher", new String[]{"id", "name", "surname", "email", "phone"});
             put("course", new String[]{"id", "title", "description", "teacher"});
-            put("account", new String[]{"id", "login", "password"});
+            put("account", new String[]{"id", "login", "password", "user", "user_id"});
         }
     };
 
@@ -71,7 +71,7 @@ public class Repository {
                 case "course" -> new Course(Integer.parseInt(values[0]), values[1], values[2], values[3]);
                 case "student" -> new Student(Integer.parseInt(values[0]), values[1], values[2], values[3], values[4]);
                 case "teacher" -> new Teacher(Integer.parseInt(values[0]), values[1], values[2], values[3], values[4]);
-                case "account" -> new Account(Integer.parseInt(values[0]), values[1], values[2]);
+                case "account" -> new Account(Integer.parseInt(values[0]), values[1], values[2], values[3], Integer.parseInt(values[4]));
             }
         }
     }
@@ -117,22 +117,18 @@ public class Repository {
     }
 
 
-    public static void addCourse(String id, String[] values) {
-        add("course", new String[]{id, values[0], values[1], values[2]});
-    }
-
-    public static void addTeacher(String id, String[] values) {
-        add("teacher",  new String[]{id, values[0], values[1], values[2], values[2]});
-    }
-
-    public static void addAccount(int id, int login, int password){
-        add("account", new String[]{id + "", login + "", password + ""});
-    }
-
     public static void addStudent(String id, String[] values) {
         add("student",  new String[]{id, values[0], values[1], values[2], values[2]});
     }
-
+    public static void addTeacher(String id, String[] values) {
+        add("teacher",  new String[]{id, values[0], values[1], values[2], values[2]});
+    }
+    public static void addCourse(String id, String[] values) {
+        add("course", new String[]{id, values[0], values[1], values[2]});
+    }
+    public static void addAccount(int id, int login, int password, String user, int user_id){
+        add("account", new String[]{id + "", login + "", password + "", user, String.valueOf(user_id)});
+    }
     public static void addEnrollment(String id, String user_id, String course_id, String user) {
         add("enrollment",  new String[]{id, user_id, course_id, user});
     }
@@ -189,18 +185,18 @@ public class Repository {
                                     "where id = " + id + ");");
 
                 case "teacher", "student" -> statement =
-                        conn.prepareStatement("update " + tableName +
-                                " set " +
-                                columns[1] + " = " + values[0] +
-                                columns[2] + " = " + values[1] +
-                                columns[3] + " = " + values[2] +
-                                columns[4] + " = " + values[3] +
+                        conn.prepareStatement(
+                                  "update " + tableName + " set " +
+                                columns[1] + " = " + values[1] + ", " +
+                                columns[2] + " = " + values[2] + ", " +
+                                columns[3] + " = " + values[3] + ", " +
+                                columns[4] + " = " + values[4] + ", " +
                                 "where id = " + id + ");");
                 case "account" -> statement =
-                        conn.prepareStatement("update " + tableName +
-                                " set " +
-                                columns[2] + " = " + values[0].hashCode() +
-                                "where id = " + id + ";");
+                            conn.prepareStatement("update " + tableName +
+                                    " set " +
+                                    columns[2] + " = '" + values[0].hashCode() +
+                                    "' WHERE id = " + id + ";");
             }
             statement.executeUpdate();
             conn.close();

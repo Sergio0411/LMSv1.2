@@ -1,4 +1,4 @@
-package com.company.view;
+package com.company.view.register;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,13 +1,11 @@
-package com.company.view;
+package com.company.view.delete;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class DeleteAccountFrame extends JFrame {
     public DeleteAccountPanel panel = new DeleteAccountPanel();
-    public int id;
-    public DeleteAccountFrame(int id){
-        this.id = id;
+    public DeleteAccountFrame(){
         setTitle("Delete Account to LMS");
         getContentPane().setBackground(Color.DARK_GRAY);
         setSize(380, 140);

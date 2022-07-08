@@ -1,12 +1,16 @@
 package com.company.view.teacher;
 
+import com.company.Main;
 import com.company.model.Course;
 import com.company.model.Enrollment;
 import com.company.model.Teacher;
+import com.company.model.saveUser;
 import com.company.view.course.CourseListPanel;
 import com.company.view.course.GetCoursesFrame;
+import com.company.view.naoAccess.noAccessPanel;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,12 +47,28 @@ public class TeacherPopupMenu extends JPopupMenu {
 
             switch (e.getActionCommand()) {
                 case "save" -> Teacher.update(id, name, surname, email, phone);
-                case "enroll" -> new GetCoursesFrame(Teacher.getTeacherById(id), true);
+                case "enroll" -> {
+                    if (!saveUser.user.equals("student")) {
+                        new GetCoursesFrame(Teacher.getTeacherById(id), true);
+                        for (int i = 0; i < Course.model.getRowCount(); i++) {
+                            Course.model.setValueAt(name + " " + surname, i, 3);
+                        }
+                    } else {
+                        noAccessPanel.noAccess.setVisible(true);
+                        noAccessPanel.error.setVisible(false);
+                        Main.noAccessFrame.setVisible(true);
+                        Main.noAccessFrame.pack();
+                    }
+                }
                 case "courses" -> new GetCoursesFrame(Teacher.getTeacherById(id), false);
                 case "delete" -> {
+                    for (int i = 0; i < Course.model.getRowCount(); i++){
+                        if (Course.model.getValueAt(i, 3).equals(name + " " + surname)){
+                            Course.model.setValueAt("Нет учителя", i, 3);
+                        }
+                    }
                     Teacher.delete(id, rowIndex);
                     Enrollment.removeByTeacherId(id);
-                    CourseListPanel.columnsName[3] = "Нет учителя";
                 }
                 default -> System.out.println("Неизвестная команда");
             }

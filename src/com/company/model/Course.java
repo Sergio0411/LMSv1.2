@@ -1,6 +1,8 @@
 package com.company.model;
 
+import com.company.Main;
 import com.company.repository.Repository;
+import com.company.view.naoAccess.noAccessPanel;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -21,7 +23,6 @@ public class Course {
     public Course(String title, String description, String teacher) {
         setProperties(++lastId, title, description, teacher);
         Repository.addCourse(String.valueOf(id), forRepository(title, description, teacher));
-
     }
 
     public Course(int id, String title, String description, String teacher) {
@@ -57,15 +58,30 @@ public class Course {
         this.teacher = teacher;
         allCourses.add(this);
         model.addRow(new Object[]{this.id, title, description, teacher});
+        Main.course = this;
     }
 
     public static void update(int id, String title, String description, String teacher) {
-        Repository.updateCourse(id, forRepository(title, description, teacher));
+        if (!saveUser.user.equals("student")) {
+            Repository.updateCourse(id, forRepository(title, description, teacher));
+        }else {
+            noAccessPanel.noAccess.setVisible(true);
+            noAccessPanel.error.setVisible(false);
+            Main.noAccessFrame.setVisible(true);
+            Main.noAccessFrame.pack();
+        }
     }
 
     public static void delete(int id, int rowIndex) {
-        Repository.deleteCourse(id);
-        model.removeRow(rowIndex);
+        if (!saveUser.user.equals("student")) {
+            Repository.deleteCourse(id);
+            model.removeRow(rowIndex);
+        }else{
+            noAccessPanel.noAccess.setVisible(true);
+            noAccessPanel.error.setVisible(false);
+            Main.noAccessFrame.setVisible(true);
+            Main.noAccessFrame.pack();
+        }
     }
 
     public static void setTeacher(String teacher){

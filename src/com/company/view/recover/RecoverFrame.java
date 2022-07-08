@@ -1,4 +1,4 @@
-package com.company.view;
+package com.company.view.recover;
 
 import javax.swing.*;
 import java.awt.*;

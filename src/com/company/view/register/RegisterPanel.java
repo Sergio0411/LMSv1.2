@@ -1,4 +1,4 @@
-package com.company.view;
+package com.company.view.register;
 
 import com.company.Main;
 import com.company.model.Account;
@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public class RegisterPanel extends JPanel {
     public RegisterPanel(){
+        JPanel error = new JPanel();
         JPanel login = new JPanel();
         JPanel password1 = new JPanel();
         JPanel password2 = new JPanel();
@@ -32,8 +33,7 @@ public class RegisterPanel extends JPanel {
         bg.add(student);
         bg.add(teacher);
 
-
-
+        JLabel errorText = new JLabel("Проверьте правильность написания логина и пароля и повторите попытку");
         JLabel log = new JLabel("         Login: ");
         JLabel pass1 = new JLabel("Password: ");
         JLabel pass2 = new JLabel("Password: ");
@@ -43,10 +43,11 @@ public class RegisterPanel extends JPanel {
         JLabel surnameL = new JLabel("  Surname: ");
 
         JButton button = new JButton("Зарегистрироваться");
+        JButton OK = new JButton("OK");
         setBackground(Color.GRAY);
         JPanel buttons = new JPanel();
 
-
+        add(error);
         add(login);
         add(password1);
         add(password2);
@@ -59,6 +60,8 @@ public class RegisterPanel extends JPanel {
 
         userSelection.add(student);
         userSelection.add(teacher);
+
+        error.add(errorText);
 
         login.add(log);
         login.add(logText);
@@ -80,24 +83,69 @@ public class RegisterPanel extends JPanel {
         surname.add(surnameText);
 
         buttons.add(button);
+        buttons.add(OK);
+
+        error.setVisible(false);
+        OK.setVisible(false);
 
         button.addActionListener(e -> {
-            Main.registerFrame.setVisible(false);
             if (!(logText.getText().isEmpty() &&
                     pass1Text.getText().isEmpty() &&
                     pass2Text.getText().isEmpty() &&
                     EMText.getText().isEmpty() &&
                     PhoneText.getText().isEmpty() &&
                     nameText.getText().isEmpty() &&
-                    surnameText.getText().isEmpty()) && Objects.equals(pass1Text.getText(), pass2Text.getText())) {
-                new Account(logText.getText(), pass1Text.getText());
+                    surnameText.getText().isEmpty()) &&
+                    Objects.equals(pass1Text.getText(),
+                    pass2Text.getText()) &&
+                    (teacher.isSelected() || student.isSelected())) {
                 if (teacher.isSelected()){
                     new Teacher(nameText.getText(), surnameText.getText(), EMText.getText(), PhoneText.getText());
+                    int id = Teacher.getId();
+                    new Account(logText.getText(), pass1Text.getText(), "teacher", id);
                 }
                 if (student.isSelected()){
                     new Student(nameText.getText(), surnameText.getText(), EMText.getText(), PhoneText.getText());
+                    int id = Student.getId();
+                    new Account(logText.getText(), pass1Text.getText(), "student", id);
                 }
+                Main.registerFrame.setVisible(false);
+                logText.setText("");
+                pass1Text.setText("");
+                pass2Text.setText("");
+                EMText.setText("");
+                PhoneText.setText("");
+                nameText.setText("");
+                surnameText.setText("");
+                bg.clearSelection();
+            }else {
+                error.setVisible(true);
+                OK.setVisible(true);
+                login.setVisible(false);
+                password1.setVisible(false);
+                password2.setVisible(false);
+                email.setVisible(false);
+                phone.setVisible(false);
+                name.setVisible(false);
+                surname.setVisible(false);
+                userSelection.setVisible(false);
+                button.setVisible(false);
+                Main.registerFrame.pack();
             }
+        });
+        OK.addActionListener(e -> {
+            error.setVisible(false);
+            OK.setVisible(false);
+            login.setVisible(true);
+            password1.setVisible(true);
+            password2.setVisible(true);
+            email.setVisible(true);
+            phone.setVisible(true);
+            name.setVisible(true);
+            surname.setVisible(true);
+            userSelection.setVisible(true);
+            button.setVisible(true);
+            Main.registerFrame.pack();
         });
     }
 }

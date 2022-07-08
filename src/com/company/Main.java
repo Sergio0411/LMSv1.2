@@ -1,8 +1,14 @@
 package com.company;
 
+import com.company.model.Course;
 import com.company.repository.Repository;
-import com.company.view.*;
 import com.company.view.course.AddCourseFrame;
+import com.company.view.delete.DeleteAccountFrame;
+import com.company.view.login.LoginFrame;
+import com.company.view.MainFrame;
+import com.company.view.naoAccess.noAccessFrame;
+import com.company.view.recover.RecoverFrame;
+import com.company.view.register.RegisterFrame;
 
 public class Main {
     public static LoginFrame loginFrame;
@@ -13,6 +19,8 @@ public class Main {
     public static AddCourseFrame addCourseFrame = new AddCourseFrame();
     public static int id;
     public static DeleteAccountFrame deleteAccountFrame;
+    public static com.company.view.naoAccess.noAccessFrame noAccessFrame = new noAccessFrame();
+    public static Course course;
 
     public static void main(String[] args) {
         loginFrame = new LoginFrame();

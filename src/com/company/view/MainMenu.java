@@ -1,12 +1,11 @@
 package com.company.view;
 
 import com.company.Main;
-import com.company.model.Account;
+import com.company.view.delete.*;
 
 import javax.swing.*;
 
 public class MainMenu extends JMenuBar {
-
     public MainMenu() {
         add(fileMenu());
         add(addMenu());
@@ -27,9 +26,7 @@ public class MainMenu extends JMenuBar {
 
         file.add(deleteAcc);
         deleteAcc.addActionListener(e -> {
-            int id = Account.getIdByUser();
-            Main.id = id;
-            Main.deleteAccountFrame = new DeleteAccountFrame(id);
+            Main.deleteAccountFrame = new DeleteAccountFrame();
             Main.deleteAccountFrame.setVisible(true);
         });
         file.addSeparator();

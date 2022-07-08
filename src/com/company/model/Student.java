@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Student {
-    private int id;
+    private static int id;
     String name;
     String surname;
     String email;
@@ -69,8 +69,8 @@ public class Student {
         model.addRow(new Object[]{id, name, surname, email, phone});
     }
 
-    public int getId() {
-        return this.id;
+    public static int getId() {
+        return Student.id;
     }
 
     public String getInfo() {
@@ -91,6 +91,18 @@ public class Student {
         }
         return marks;
     }
+
+    public static int[] returnIds(){
+        ArrayList<String> accounts = Repository.getAll("student");
+        int[] id = new int[accounts.size()/5];
+        int t = 0;
+        for (int i = 0; i < accounts.size(); i += 5) {
+            id[t] = Integer.parseInt(accounts.get(i));
+            t++;
+        }
+        return id;
+    }
+
 
     public static Student getStudentById(int id) {
         for (Student student : allStudents) {

@@ -2,6 +2,8 @@ package com.company.view.course;
 
 import com.company.Main;
 import com.company.model.Course;
+import com.company.model.Enrollment;
+import com.company.model.Teacher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +35,7 @@ public class AddCoursePanel extends JPanel {
                 titleTF.setText("");
                 descriptionTF.setText("");
                 Main.addCourseFrame.setVisible(false);
+                new Enrollment(Teacher.getTeacherById(teacherCB.getSelectedIndex() - 1), Main.course);
             }
         });
 

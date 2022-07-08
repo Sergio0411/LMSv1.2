@@ -1,4 +1,4 @@
-package com.company.view;
+package com.company.view.login;
 
 import com.company.Main;
 import com.company.model.Account;

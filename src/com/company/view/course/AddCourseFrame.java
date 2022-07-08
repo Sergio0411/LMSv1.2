@@ -1,7 +1,6 @@
 package com.company.view.course;
 
 import com.company.model.Teacher;
-import com.company.repository.Repository;
 
 import javax.swing.*;
 import java.awt.*;

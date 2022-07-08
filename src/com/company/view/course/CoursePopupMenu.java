@@ -1,7 +1,9 @@
 package com.company.view.course;
 
+import com.company.model.Account;
 import com.company.model.Course;
 import com.company.model.Enrollment;
+import com.company.model.saveUser;
 import com.company.view.student.GetStudentsFrame;
 import com.company.view.teacher.GetTeacherFrame;
 

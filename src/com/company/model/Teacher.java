@@ -1,13 +1,15 @@
 package com.company.model;
 
+import com.company.Main;
 import com.company.repository.Repository;
+import com.company.view.naoAccess.noAccessPanel;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Teacher {
-    int id;
+    static int id;
     String name;
     String surname;
     String email;
@@ -28,7 +30,7 @@ public class Teacher {
     }
 
     public void setProperties(int id, String name, String surname, String email, String phone) {
-        this.id = id;
+        Teacher.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -46,12 +48,26 @@ public class Teacher {
     }
 
     public static void update(int id, String name, String surname, String email, String phone) {
-        Repository.updateTeacher(id, forRepository(name, surname, email, phone));
+        if (!saveUser.user.equals("student")) {
+            Repository.updateTeacher(id, forRepository(name, surname, email, phone));
+        }else {
+            noAccessPanel.noAccess.setVisible(true);
+            noAccessPanel.error.setVisible(false);
+            Main.noAccessFrame.setVisible(true);
+            Main.noAccessFrame.pack();
+        }
     }
 
     public static void delete(int id, int rowIndex) {
-        Repository.deleteTeacher(id);
-        model.removeRow(rowIndex);
+        if (!saveUser.user.equals("student")) {
+            Repository.deleteTeacher(id);
+            model.removeRow(rowIndex);
+        }else {
+            noAccessPanel.noAccess.setVisible(true);
+            noAccessPanel.error.setVisible(false);
+            Main.noAccessFrame.setVisible(true);
+            Main.noAccessFrame.pack();
+        }
     }
 
     public static ArrayList<Course> getCoursesById(int id) {
@@ -65,18 +81,30 @@ public class Teacher {
     }
 
     public static String[] getTeachers(){
-        String[] teachers = new String[allTeachers.size()];
+        String[] teachers = new String[allTeachers.size() + 1];
+        teachers[0] = "Нет учителя";
         ArrayList<String> teacher = Repository.getAll("teacher");
         int t = 1;
-        for(int i = 0; i < teachers.length; i++){
+        for(int i = 1; i < teachers.length; i++){
             teachers[i] = teacher.get(t) + " " + teacher.get(t+1);
             t += 5;
         }
         return teachers;
     }
 
-    public int getId() {
-        return this.id;
+    public static int[] returnIds(){
+        ArrayList<String> accounts = Repository.getAll("teacher");
+        int[] id = new int[accounts.size()/5];
+        int t = 0;
+        for (int i = 0; i < accounts.size(); i += 5) {
+            id[t] = Integer.parseInt(accounts.get(i));
+            t++;
+        }
+        return id;
+    }
+
+    public static int getId() {
+        return Teacher.id;
     }
 
     public String getInfo() {
@@ -100,7 +128,7 @@ public class Teacher {
     }
 
     public String toString() {
-        return this.id + " " + this.name;
+        return Teacher.id + " " + this.name;
     }
 
     public String getName() {

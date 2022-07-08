@@ -1,7 +1,6 @@
 package com.company.view.course;
 
 import com.company.model.Course;
-import com.company.view.student.StudentPopupMenu;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -21,7 +20,7 @@ public class CourseListPanel extends JPanel {
                 new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (e.getButton() == 3) { // 1 - ЛКМ, 2 - СРМ, 3 - ПКМ
+                        if (e.getButton() == 3) { // 1 - ЛКМ, 2 - СКМ, 3 - ПКМ
                             int currentRow = table.rowAtPoint(e.getPoint());
                             table.setRowSelectionInterval(currentRow, currentRow);
                             popupMenu.show(table, e.getX(), e.getY());
